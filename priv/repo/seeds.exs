@@ -9,3 +9,9 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Memento.{User, Repo}
+
+%User{}
+|> User.changeset(%{name: "Wouter", email: "wouter@example.com", password: "password", password_confirmation: "password"})
+|> Repo.insert!()

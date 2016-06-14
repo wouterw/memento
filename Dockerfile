@@ -35,6 +35,9 @@ RUN mix archive.install --force https://github.com/phoenixframework/archives/raw
 # ENV PHOENIX_VERSION 1.2-rc
 # RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-$PHOENIX_VERSION.ez
 
+# Install `inotify-tools` for live reloading
+RUN apt-get install inotify-tools
+
 ENV APP_HOME /srv
 
 RUN mkdir -p $APP_HOME
