@@ -37,5 +37,5 @@ config :memento, Memento.Repo,
   username: "postgres",
   password: "postgres",
   database: "memento_dev",
-  hostname: "localhost",
+  hostname: "db",
   pool_size: 10
