@@ -1,0 +1,6 @@
+<h2>New remembrance</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: admin_remembrance_path(@conn, :create) %>
+
+<%= link "Back", to: admin_remembrance_path(@conn, :index) %>

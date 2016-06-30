@@ -1,0 +1,22 @@
+<h2>Listing remembrances</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for remembrance <- @remembrances do %>
+    <tr>
+      <td><%= remembrance.name %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: remembrance_path(@conn, :show, remembrance), class: "btn btn-default btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

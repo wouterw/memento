@@ -13,5 +13,5 @@
 alias Memento.{User, Repo}
 
 %User{}
-|> User.changeset(%{name: "Wouter", email: "wouter@example.com", password: "password", password_confirmation: "password"})
+|> User.changeset(%{name: "Wouter", email: "user@example.com", password: "password", password_confirmation: "password"})
 |> Repo.insert!()
