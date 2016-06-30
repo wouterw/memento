@@ -1,4 +1,4 @@
-FROM elixir:latest
+FROM elixir:1.3
 
 # Install node.js
 # https://github.com/nodejs/docker-node/blob/master/6.2/Dockerfile
@@ -18,7 +18,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 6.2.1
+ENV NODE_VERSION 6.2.2
 
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
@@ -30,13 +30,11 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 # Install phoenix
 # https://github.com/phoenixframework/archives
 
-RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/1.2-rc/phoenix_new.ez
-
-# ENV PHOENIX_VERSION 1.2-rc
-# RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-$PHOENIX_VERSION.ez
+ENV PHOENIX_VERSION 1.2.0
+RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-$PHOENIX_VERSION.ez
 
 # Install `inotify-tools` for live reloading
-RUN apt-get install inotify-tools
+# RUN apt-get install inotify-tools
 
 ENV APP_HOME /srv
 
@@ -46,7 +44,7 @@ WORKDIR $APP_HOME
 
 COPY mix* $APP_HOME/
 
-RUN mix deps.get
-RUN npm install && node node_modules/brunch/bin/brunch build
+# RUN mix deps.get
+# RUN npm install && node node_modules/brunch/bin/brunch build
 
 COPY . $APP_HOME
