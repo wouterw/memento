@@ -1,0 +1,11 @@
+<h2>Show remembrance</h2>
+
+<ul>
+  <li>
+    <strong>Name:</strong>
+    <%= @remembrance.name %>
+  </li>
+</ul>
+
+<%= link "Edit", to: remembrance_path(@conn, :edit, @remembrance) %>
+<%= link "Back", to: remembrance_path(@conn, :index) %>

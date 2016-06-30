@@ -13,14 +13,24 @@ defmodule Memento.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Memento do
-    pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
+  pipeline :authenticated do
+    plug Memento.Auth, repo: Memento.Repo
+    plug Memento.RequireUser
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Memento do
-  #   pipe_through :api
-  # end
+  scope "/", Memento do
+    pipe_through :browser
+
+    get "/", PageController, :index
+
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
+    resources "/remembrances", RemembranceController, only: [:index, :show]
+  end
+
+  scope "/admin", Memento, as: :admin do
+    pipe_through [:browser, :authenticated]
+
+    resources "/users", Admin.UserController
+    resources "/remembrances", Admin.RemembranceController
+  end
 end
